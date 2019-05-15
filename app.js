@@ -10,7 +10,7 @@ class App {
       menuElement.addEventListener('submit',this.Submit);
 
 
-      var musicElement=document.querySelector('#overlay');
+      var musicElement=document.querySelector('#main');
 
 
       this.MenuScreen = new MenuScreen(menuElement);
@@ -22,5 +22,16 @@ class App {
         event.preventDefault();
         this.MenuScreen.hide();
         this.MusicScreen.show();
+        let choice=document.querySelectorAll('option');
+        let gif=document.querySelector('input');
+        var music;
+        for(var i of choice)
+            if(i.selected)
+                music=i;
+        console.log(gif);
+        console.log(music.value);
+        console.log(music.textContent);
+        console.log(event);
+        
     }
 }

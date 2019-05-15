@@ -11,8 +11,26 @@ class MusicScreen {
   constructor(containerElement) {
 
     this.containerElement = containerElement;
-    let node = document.createElement("div");
+    this.data=null;
     // TODO(you): Implement the constructor and add fields as necessary.
+    function onJsonReady(json) {
+      console.log(json.data[1]);
+      const gif = document.querySelector('#gif');
+      let img = document.createElement("img");
+      img.src = json.data[11].images.downsized.url;
+      img.style.width= '100%';
+      gif.append(img);
+    }
+
+
+    function onResponse(response) {
+      return response.json();
+    }
+    fetch('https://gist.githubusercontent.com/vrk/3dd93294a4a53970013dbc23ae7008b9/raw/6da6d6c9ce5a220a4eedbc8778ed6bf58d8f5021/gistfile1.txt')
+      .then(onResponse)
+      .then(onJsonReady);
+
+
   }
 
   show() {

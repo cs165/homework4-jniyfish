@@ -8,7 +8,7 @@ class MenuScreen {
       const SongList = albums;
       const select = document.querySelector('#song-selector');
       const input = document.querySelector('#query-input');
-    
+      const submit = document.querySelector('#submit');
       var random = getRandomInt(themeList.length);
 
       input.setAttribute("value", themeList[random]);
@@ -19,6 +19,7 @@ class MenuScreen {
         select.append(new Option(SongList[i].title, SongList[i].songUrl));
       }
     }
+
     function onResponse(response) {
       return response.json();
     }
