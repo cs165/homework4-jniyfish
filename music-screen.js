@@ -11,14 +11,14 @@ class MusicScreen {
   constructor(containerElement) {
 
     this.containerElement = containerElement;
-    this.data=null;
+    this.data = null;
     // TODO(you): Implement the constructor and add fields as necessary.
     function onJsonReady(json) {
-      console.log(json.data[1]);
+    //  console.log(json.data[1]);
       const gif = document.querySelector('#gif');
       let img = document.createElement("img");
-      img.src = json.data[11].images.downsized.url;
-      img.style.width= '100%';
+      img.src = json.data[0].images.downsized.url;
+      img.style.width = '100%';
       gif.append(img);
     }
 
@@ -26,7 +26,9 @@ class MusicScreen {
     function onResponse(response) {
       return response.json();
     }
-    fetch('https://gist.githubusercontent.com/vrk/3dd93294a4a53970013dbc23ae7008b9/raw/6da6d6c9ce5a220a4eedbc8778ed6bf58d8f5021/gistfile1.txt')
+    // fetch('https://gist.githubusercontent.com/vrk/3dd93294a4a53970013dbc23ae7008b9/raw/6da6d6c9ce5a220a4eedbc8778ed6bf58d8f5021/gistfile1.txt')
+   // fetch('http://api.giphy.com/v1/gifs/search?q=cat&limit=25&rating=g&api_key=dc6zaTOxFJmzC')
+   fetch('https://api.giphy.com/v1/gifs/search?q=hot%20chocolate&api_key=dc6zaTOxFJmzC&limit=25&rating=g')
       .then(onResponse)
       .then(onJsonReady);
 

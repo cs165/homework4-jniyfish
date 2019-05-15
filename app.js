@@ -5,6 +5,8 @@
 class App {
   constructor() {
       this.Submit=this.Submit.bind(this);
+      this.url="";
+      this.songName="";
 
       var menuElement = document.querySelector('#menu');
       menuElement.addEventListener('submit',this.Submit);
@@ -29,6 +31,9 @@ class App {
             if(i.selected)
                 music=i;
         console.log(gif);
+        this.url=music.value;
+        this.songName=music.textContent;
+        this.Buutton = new PlayButton(this.url,this.songName);
         console.log(music.value);
         console.log(music.textContent);
         console.log(event);
