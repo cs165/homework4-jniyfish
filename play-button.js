@@ -3,9 +3,12 @@
 //
 // See HW4 writeup for more hints and details.
 class PlayButton {
-  constructor(input1,input2) {
-    this.url=input1;
-    this.value=input2
+  constructor(input1, input2) {
+    this.url = input1;
+    this.value = input2;
+
+    this.isPlaying = 0;
+
     const button = document.querySelector('#button');
     this.audioPlayer = new AudioPlayer();
     this.onClick = this.onClick.bind(this);
@@ -14,7 +17,7 @@ class PlayButton {
     button.append(img);
     img.style.width = "60px";
     img.style.height = "60px";
-    img.addEventListener('click',this.onClick);
+    img.addEventListener('click', this.onClick);
 
     // TODO(you): Implement the constructor and add fields as necessary.
   }
@@ -25,12 +28,18 @@ class PlayButton {
   hide() {
     this.containerElement.classList.add('inactive');
   }
-  onClick(event)
-  {
-    alert("hi");
-    this.audioPlayer.setSong(this.url);
-    //this.audioPlayer.setSong("https://www.youtube.com/watch?v=y2x5e2pEsPY");
-    this.audioPlayer.play();
+  onClick(event) {
+    if (this.isPlaying == 0) {
+      console.log("hi");
+      this.audioPlayer.setSong(this.url);
+      //this.audioPlayer.setSong("https://www.youtube.com/watch?v=y2x5e2pEsPY");
+      this.audioPlayer.play();
+      this.isPlaying = 1;
+    }
+    else{
+      this.audioPlayer.pause();
+      this.isPlaying = 0;
+    }
   }
 
 }
