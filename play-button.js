@@ -13,6 +13,7 @@ class PlayButton {
     this.audioPlayer = new AudioPlayer();
     this.onClick = this.onClick.bind(this);
     let img = document.createElement("img");
+    img.setAttribute("id", "playButton");
     img.src = "./images/play.png"
     button.append(img);
     img.style.width = "60px";
@@ -35,10 +36,14 @@ class PlayButton {
       //this.audioPlayer.setSong("https://www.youtube.com/watch?v=y2x5e2pEsPY");
       this.audioPlayer.play();
       this.isPlaying = 1;
+      let button = document.querySelector('#playButton');
+      button.setAttribute("src","./images/pause.png");
     }
     else{
       this.audioPlayer.pause();
       this.isPlaying = 0;
+      let button = document.querySelector('#playButton');
+      button.setAttribute("src","./images/play.png");
     }
   }
 
