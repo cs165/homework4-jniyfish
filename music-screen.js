@@ -8,8 +8,20 @@
 //
 // See HW4 writeup for more hints and details.
 class MusicScreen {
-  constructor() {
+  constructor(containerElement) {
+
+    this.containerElement = containerElement;
+    let node = document.createElement("div");
     // TODO(you): Implement the constructor and add fields as necessary.
+  }
+
+  show() {
+    console.log("mu");
+    this.containerElement.classList.remove('inactive');
+  }
+
+  hide() {
+    this.containerElement.classList.add('inactive');
   }
   // TODO(you): Add methods as necessary.
 }
