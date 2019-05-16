@@ -30,9 +30,10 @@ class App {
         for(var i of choice)
             if(i.selected)
                 music=i;
-        console.log(gif);
+        console.log(gif.value);
         this.url=music.value;
         this.songName=music.textContent;
+        this.GIF = new GifDisplay(gif.value);
         this.Buutton = new PlayButton(this.url,this.songName);
         console.log(music.value);
         console.log(music.textContent);
