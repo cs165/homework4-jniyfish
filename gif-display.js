@@ -12,7 +12,7 @@ class GifDisplay {
     this.zindex = 1;
     this.getGIF = this.getGIF.bind(this);
     this.album = null;
-
+    this.random = 0;
     this.getGIF();
 
   }
@@ -22,33 +22,32 @@ class GifDisplay {
         return onResponse.json();
       })
       .then(json => {
-        if(json.data.length<2)
-        {
+        if (json.data.length < 2) {
           alert("img less than 2 ");
           javascript: history.go(0)
         }
         //  this.album=json;
-        let random = getRandomInt(json.data.length);
+        this.random = getRandomInt(json.data.length);
         this.album = json;
 
-        console.log(random);
+        console.log(this.random);
         const gif = document.querySelector('#gif');
 
         let img = document.createElement("img");
         img.setAttribute("id", "img1");
         img.style.zIndex = "1";
         img.style.position = "absolute";
-        img.src = json.data[random].images.downsized.url;
+        img.src = json.data[this.random].images.downsized.url;
 
 
         let img2 = document.createElement("img");
         img2.setAttribute("id", "img2");
-        random = getRandomInt(json.data.length);
-        if (random == json.data.length)
-          random = 0;
+        this.random = getRandomInt(json.data.length);
+        if (this.random == json.data.length)
+          this.random = 0;
         else
-          random++;
-        img2.src = json.data[random].images.downsized.url;
+          this.random++;
+        img2.src = json.data[this.random].images.downsized.url;
         img2.style.position = "absolute";
         img2.style.zIndex = "2";
 
@@ -63,8 +62,11 @@ class GifDisplay {
       img.style.zIndex = "2";
       let img2 = document.querySelector('#img2');
       img2.style.zIndex = "1";
-      let random = getRandomInt(this.album.data.length);
-      img1.src = this.album.data[random].images.downsized.url;
+      if (this.random == this.album.data.length)
+        this.random = 0;
+      else
+        this.random++;
+      img1.src = this.album.data[this.random].images.downsized.url;
       this.zindex = 0;
     }
     else {
@@ -72,8 +74,11 @@ class GifDisplay {
       img.style.zIndex = "1";
       let img2 = document.querySelector('#img2');
       img2.style.zIndex = "2";
-      let random = getRandomInt(this.album.data.length);
-      img2.src = this.album.data[random].images.downsized.url;
+      if (this.random == this.album.data.length)
+        this.random = 0;
+      else
+        this.random++;
+      img2.src = this.album.data[this.random].images.downsized.url;
       this.zindex = 1;
     }
   }
