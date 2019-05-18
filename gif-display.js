@@ -8,39 +8,73 @@ class GifDisplay {
     this.url = "https://api.giphy.com/v1/gifs/search?";
     this.message = "q=" + input1 + "&api_key=gm2ZMlRhxG54KrlmuhJ8J4O2SREJW4G7&limit=25&rating=g";
     this.url = this.url + this.message;
-    console.log(this.url);
+    this.len = 1;
+    this.zindex = 1;
+    this.getGIF = this.getGIF.bind(this);
+    this.album = null;
 
-    // TODO(you): Implement the constructor and add fields as necessary.
-    function onJsonReady(json) {
-      //  console.log(json.data[1]);
-      let random = getRandomInt(25);
-      const gif = document.querySelector('#gif');
-      let img = document.createElement("img");
-      img.src = json.data[random].images.downsized.url;
+    this.getGIF();
 
-
-      //img.style.maxwidth = '100%';
-      // img.style.maxheight = '100%';
-      // img.style.width = '100%';
-      // img.style.height = '100%';
-      gif.append(img);
-
-      //img.style.overflowY="hidden";
-    }
-
-
-    function onResponse(response) {
-      return response.json();
-    }
-    // fetch('https://gist.githubusercontent.com/vrk/3dd93294a4a53970013dbc23ae7008b9/raw/6da6d6c9ce5a220a4eedbc8778ed6bf58d8f5021/gistfile1.txt')
-    // fetch('http://api.giphy.com/v1/gifs/search?q=cat&limit=25&rating=g&api_key=dc6zaTOxFJmzC')
-    //  fetch('https://api.giphy.com/v1/gifs/search?q=hot%20chocolate&api_key=dc6zaTOxFJmzC&limit=25&rating=g')
-    //fetch("https://api.giphy.com/v1/gifs/search?q=cats&api_key=gm2ZMlRhxG54KrlmuhJ8J4O2SREJW4G7&limit=25&rating=g")
-    fetch(this.url)
-      .then(onResponse)
-      .then(onJsonReady);
-
-    // TODO(you): Implement the constructor and add fields as necessary.
   }
-  // TODO(you): Add methods as necessary.
+  getGIF() {
+    fetch(this.url)
+      .then(onResponse => {
+        return onResponse.json();
+      })
+      .then(json => {
+        if(json.data.length<2)
+        {
+          alert("img less than 2 ");
+          javascript: history.go(0)
+        }
+        //  this.album=json;
+        let random = getRandomInt(json.data.length);
+        this.album = json;
+
+        console.log(random);
+        const gif = document.querySelector('#gif');
+
+        let img = document.createElement("img");
+        img.setAttribute("id", "img1");
+        img.style.zIndex = "1";
+        img.style.position = "absolute";
+        img.src = json.data[random].images.downsized.url;
+
+
+        let img2 = document.createElement("img");
+        img2.setAttribute("id", "img2");
+        random = getRandomInt(json.data.length);
+        if (random == json.data.length)
+          random = 0;
+        else
+          random++;
+        img2.src = json.data[random].images.downsized.url;
+        img2.style.position = "absolute";
+        img2.style.zIndex = "2";
+
+        gif.append(img);
+        gif.append(img2);
+
+      });
+  }
+  change() {
+    if (this.zindex == 1) {
+      let img = document.querySelector('#img1');
+      img.style.zIndex = "2";
+      let img2 = document.querySelector('#img2');
+      img2.style.zIndex = "1";
+      let random = getRandomInt(this.album.data.length);
+      img1.src = this.album.data[random].images.downsized.url;
+      this.zindex = 0;
+    }
+    else {
+      let img = document.querySelector('#img1');
+      img.style.zIndex = "1";
+      let img2 = document.querySelector('#img2');
+      img2.style.zIndex = "2";
+      let random = getRandomInt(this.album.data.length);
+      img2.src = this.album.data[random].images.downsized.url;
+      this.zindex = 1;
+    }
+  }
 }

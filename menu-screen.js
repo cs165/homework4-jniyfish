@@ -8,14 +8,12 @@ class MenuScreen {
       const SongList = albums;
       const select = document.querySelector('#song-selector');
       const input = document.querySelector('#query-input');
-      const submit = document.querySelector('#submit');
       var random = getRandomInt(themeList.length);
 
       input.setAttribute("value", themeList[random]);
 
       for (let i of Object.keys(SongList)) {
         console.log(i);
-        var option = document.createElement("option");
         select.append(new Option(SongList[i].title, SongList[i].songUrl));
       }
     }
@@ -24,9 +22,9 @@ class MenuScreen {
       return response.json();
     }
     fetch('https://fullstackccu.github.io/homeworks/hw4/songs.json')
+    //fetch("https://api.spotify.com/v1/artists/1vCWHaC5f2uS3yhpwWbIA6/albums?album_type=SINGLE&offset=20&limit=10")
       .then(onResponse)
       .then(onJsonReady);
-    // TODO(you): Implement the constructor and add fields as necessary.
   }
  
 
